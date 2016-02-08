@@ -3,12 +3,27 @@ using System.IO;
 
 namespace coffee
 {
-	public struct Vector2
+	public class Vector2
 	{
 		public int X;
 		public int Y;
 
 		public int Size{ get { return X * Y; } }
+
+		public static Vector2 North{ get { return new Vector2 (0, -1); } }
+
+		public static Vector2 South{ get { return new Vector2 (0, 1); } }
+
+		public static Vector2 East{ get { return new Vector2 (1, 0); } }
+
+		public static Vector2 West{ get { return new Vector2 (-1, 0); } }
+
+		public static Vector2 Zero{ get { return new Vector2 (0, 0); } }
+
+		public static Vector2 operator + (Vector2 a, Vector2 b)
+		{
+			return new Vector2 (a.X + b.X, a.Y + b.Y);
+		}
 
 		public Vector2 (int width, int height)
 		{
@@ -37,8 +52,25 @@ namespace coffee
 			LoadMap (mapName);
 		}
 
+		public bool IsTileSolid (Vector2 location)
+		{
+			return IsTileSolid (location.X, location.Y);
+		}
+
+		public bool IsTileSolid (int x, int y)
+		{
+			return GetTile (x, y).Solid;
+		}
+
+		public Tile GetTile (Vector2 location)
+		{
+			return GetTile (location.X, location.Y);
+		}
+
 		public Tile GetTile (int x, int y)
 		{
+			if (x >= Size.X || x < 0 || y >= Size.Y || y < 0)
+				throw new ArgumentException ("Map lookup out of range.");
 			return Tiles [y * Size.X + x];
 		}
 
