@@ -51,6 +51,10 @@
     <Compile Include="Message.cs" />
     <Compile Include="Actor.cs" />
     <Compile Include="Monster.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Zombie.cs" />
+    <Compile Include="Imp.cs" />
+    <Compile Include="Demon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

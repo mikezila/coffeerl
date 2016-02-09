@@ -5,8 +5,9 @@ namespace coffee
 {
 	public class Vector2
 	{
-		public int X;
-		public int Y;
+		public int X { get; set; }
+
+		public int Y{ get; set; }
 
 		public int Size{ get { return X * Y; } }
 

@@ -16,25 +16,30 @@ namespace coffee
 		Champion
 	}
 
-	public class Monster : Actor
+	public abstract class Monster : Actor
 	{
-		public MonsterStrength Strength { get; private set; }
+		public MonsterStrength Strength { get; protected set; }
 
-		public MonsterType Type { get; private set; }
+		public MonsterType Type { get; protected set; }
 
-		public Monster (CMap map, Vector2 initialLocation, MonsterType monsterType, MonsterStrength monsterStrength)
-		{
-			Rand = new Random ();
-			Strength = monsterStrength;
-			Type = monsterType;
-			Map = map;
-			Location = initialLocation;
-			Glyph = 'z';
+		public virtual string MonsterTypeString {
+			get {
+				switch (Type) {
+				case MonsterType.Demon:
+					return "Demon";
+				case MonsterType.Imp:
+					return "Imp";
+				case MonsterType.Zombie:
+					return "Zombie";
+				default:
+					throw new ArgumentException ("Bad monster type.");
+				}
+			}
 		}
 
-		public override void Update ()
+		public void Announce ()
 		{
-			Wander ();
+
 		}
 
 		public void Wander ()
@@ -47,7 +52,7 @@ namespace coffee
 		//Returns true if collided with wall
 		private bool RandomMove ()
 		{
-			switch (Rand.Next (4)) {
+			switch (Util.RandomNumber (0, 4)) {
 			case 0:
 				return Move (Direction.North);
 			case 1:

@@ -2,17 +2,17 @@
 
 namespace coffee
 {
-	public abstract class Actor
+	public abstract class Actor : IComparable
 	{
 		protected CMap Map{ get; set; }
-
-		protected Random Rand { get; set; }
 
 		public Vector2 Location{ get; protected set; }
 
 		public string Name { get; protected set; }
 
 		public int Health { get; protected set; }
+
+		public int Speed { get; protected set; }
 
 		public char Glyph { get; protected set; }
 
@@ -55,6 +55,20 @@ namespace coffee
 			}
 		}
 
+		#region IComparable implementation
+
+		public int CompareTo (object obj)
+		{
+			Actor other = (Actor)obj;
+			if (other.Speed == this.Speed)
+				return 0;
+			else if (other.Speed > this.Speed)
+				return -1;
+			else
+				return 1;
+		}
+
+		#endregion
 	}
 }
 

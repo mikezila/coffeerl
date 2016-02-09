@@ -13,28 +13,14 @@ namespace coffee
 
 	public class Player : Actor
 	{
-
-		public Player (CMap map, string name)
-		{
-			Reset ();
-			this.Map = map;
-			Location = map.PlayerStart;
-			Name = name;
-		}
-
 		public Player (CMap map)
 		{
-			Reset ();
 			this.Map = map;
 			Location = map.PlayerStart;
 			Name = RandomizeName ();
-		}
-
-		private void Reset ()
-		{
-			Rand = new Random ();
 			Glyph = '@';
 			Health = 100;
+			Speed = 100;
 		}
 
 		public override void Update ()
@@ -69,7 +55,7 @@ namespace coffee
 			lastNames [8] = "Xi";
 			lastNames [9] = "Sly";
 
-			return firstNames [Rand.Next (10)] + " " + lastNames [Rand.Next (10)];
+			return firstNames [Util.RandomNumber (1, 10)] + " " + lastNames [Util.RandomNumber (1, 10)];
 		}
 	}
 }

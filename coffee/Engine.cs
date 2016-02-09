@@ -20,7 +20,9 @@ namespace coffee
 			map = new CMap ("map1.cmap");
 			player = new Player (map);
 			actors.Add (player);
-			actors.Add (new Monster (map, new Vector2 (3, 3), MonsterType.Zombie, MonsterStrength.Normal));
+			actors.Add (new Zombie (map, new Vector2 (3, 3), MonsterStrength.Normal));
+			actors.Add (new Imp (map, new Vector2 (20, 2), MonsterStrength.Normal));
+			actors.Add (new Demon (map, new Vector2 (20, 8), MonsterStrength.Normal));
 		}
 
 		void renderUI ()
@@ -65,37 +67,40 @@ namespace coffee
 			RLKeyPress keypress = game.Keyboard.GetKeyPress ();
 
 			bool moveCollide = false;
+			bool completeTurn = false;
 			Vector2 moveVector = Vector2.Zero;
 			if (keypress != null) {
 				switch (keypress.Key) {
-				case RLKey.L:
-					mapOrigin += Vector2.East;
-					break;
 				case RLKey.Up:
 				case RLKey.W:
 					moveCollide = player.Move (Direction.North);
 					moveVector = Vector2.North;
+					completeTurn = true;
 					break;
 				case RLKey.Down:
 				case RLKey.S:
 					moveCollide = player.Move (Direction.South);
 					moveVector = Vector2.South;
+					completeTurn = true;
 					break;
 				case RLKey.Left:
 				case RLKey.A:
 					moveCollide = player.Move (Direction.West);
 					moveVector = Vector2.West;
+					completeTurn = true;
 					break;
 				case RLKey.Right:
 				case RLKey.D:
 					moveCollide = player.Move (Direction.East);
 					moveVector = Vector2.East;
+					completeTurn = true;
 					break;
 				case RLKey.Q:
 					messages.RandomQuote ();
 					break;
 				case RLKey.X:
 					messages.AddMessage ("You wait.", Message.MessageType.Generic);
+					completeTurn = true;
 					break;
 				case RLKey.Escape:
 					game.Close ();
@@ -105,9 +110,11 @@ namespace coffee
 					string blockingType = map.GetTile (player.Location + moveVector).Name;
 					messages.AddMessage ("The way is blocked by a " + blockingType);
 				}
-
-				foreach (Actor actor in actors) {
-					actor.Update ();
+				if (completeTurn) {
+					actors.Sort ();
+					foreach (Actor actor in actors) {
+						actor.Update ();
+					}
 				}
 			}
 		}
@@ -118,7 +125,6 @@ namespace coffee
 			renderMap ();
 			renderUI ();
 			renderActors ();
-			//renderPlayer ();
 			game.Draw ();
 		}
 	}
