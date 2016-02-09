@@ -19,6 +19,8 @@ namespace coffee
 			messages = new MessageSystem (game);
 			map = new CMap ("map1.cmap");
 			player = new Player (map);
+			actors.Add (player);
+			actors.Add (new Monster (map, new Vector2 (3, 3), MonsterType.Zombie, MonsterStrength.Normal));
 		}
 
 		void renderUI ()
@@ -36,9 +38,13 @@ namespace coffee
 			game.Print (game.Width - 7, 1, "AP: 000", RLColor.Blue);
 		}
 
-		void renderPlayer ()
+		List<Actor> actors = new List<Actor> ();
+
+		void renderActors ()
 		{
-			game.Set (player.Location.X + mapOrigin.X, player.Location.Y + mapOrigin.Y, RLColor.White, null, '@');
+			foreach (Actor actor in actors) {
+				game.Set (actor.Location.X + mapOrigin.X, actor.Location.Y + mapOrigin.Y, RLColor.White, null, actor.Glyph);
+			}
 		}
 
 		// Where the top left of the map is drawn in screenspace
@@ -88,6 +94,9 @@ namespace coffee
 				case RLKey.Q:
 					messages.RandomQuote ();
 					break;
+				case RLKey.X:
+					messages.AddMessage ("You wait.", Message.MessageType.Generic);
+					break;
 				case RLKey.Escape:
 					game.Close ();
 					break;
@@ -95,6 +104,10 @@ namespace coffee
 				if (moveCollide) {
 					string blockingType = map.GetTile (player.Location + moveVector).Name;
 					messages.AddMessage ("The way is blocked by a " + blockingType);
+				}
+
+				foreach (Actor actor in actors) {
+					actor.Update ();
 				}
 			}
 		}
@@ -104,7 +117,8 @@ namespace coffee
 			game.Clear ();
 			renderMap ();
 			renderUI ();
-			renderPlayer ();
+			renderActors ();
+			//renderPlayer ();
 			game.Draw ();
 		}
 	}

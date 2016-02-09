@@ -13,24 +13,34 @@ namespace coffee
 
 	public class Player : Actor
 	{
+
 		public Player (CMap map, string name)
 		{
-			this.map = map;
-			Health = 100;
+			Reset ();
+			this.Map = map;
 			Location = map.PlayerStart;
 			Name = name;
 		}
 
 		public Player (CMap map)
 		{
-			this.map = map;
-			Health = 100;
+			Reset ();
+			this.Map = map;
 			Location = map.PlayerStart;
 			Name = RandomizeName ();
 		}
 
-		// Random names!
-		Random rand = new Random ();
+		private void Reset ()
+		{
+			Rand = new Random ();
+			Glyph = '@';
+			Health = 100;
+		}
+
+		public override void Update ()
+		{
+
+		}
 
 		private string RandomizeName ()
 		{
@@ -59,7 +69,7 @@ namespace coffee
 			lastNames [8] = "Xi";
 			lastNames [9] = "Sly";
 
-			return firstNames [rand.Next (10)] + " " + lastNames [rand.Next (10)];
+			return firstNames [Rand.Next (10)] + " " + lastNames [Rand.Next (10)];
 		}
 	}
 }
