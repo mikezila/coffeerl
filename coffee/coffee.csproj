@@ -47,6 +47,8 @@
     <Compile Include="Tile.cs" />
     <Compile Include="CMap.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="MessageSystem.cs" />
+    <Compile Include="Message.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

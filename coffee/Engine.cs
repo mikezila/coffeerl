@@ -7,8 +7,8 @@ namespace coffee
 	public class Engine
 	{
 		private RLRootConsole game;
-		private List<string> messages = new List<string> ();
 		private CMap map;
+		private MessageSystem messages;
 
 		// This is in map space, not screen space
 		private Player player;
@@ -18,39 +18,17 @@ namespace coffee
 			game = console;
 			game.Update += gameUpdate;
 			game.Render += gameRender;
+			messages = new MessageSystem (game);
 			map = new CMap ("map1.cmap");
 			player = new Player (map, map.PlayerStart, "Dudeman Guyfellow");
-			messages.Capacity = 100;
-			messages.Add ("coffeeRogue v0.1 - \"Domino\"");
-			messages.Add ("Entering floor 1..." + map.Name);
-			messages.Add ("Prepare yourself!");
-		}
-
-		Random rand = new Random ();
-
-		void RandomQuote ()
-		{
-			string[] quotes = new string[6];
-			quotes [0] = "The way forward becomes clear.";
-			quotes [1] = "The weight of the world seems lighter.";
-			quotes [2] = "Death's advocate approaches...";
-			quotes [3] = "The darkness here is tangible and unatural...";
-			quotes [4] = "Your experience teaches you well.";
-			quotes [5] = "You no longer fear fire.";
-
-			messages.Add (quotes [rand.Next (6)]);
 		}
 
 		void renderUI ()
 		{
-			// Render the message scrollback
-			int line = 0;
-			game.Print (0, line++, messages [messages.Count - 3], RLColor.Gray);
-			game.Print (0, line++, messages [messages.Count - 2], RLColor.LightGray);
-			game.Print (0, line++, messages [messages.Count - 1], RLColor.White);
+			messages.RenderMessageScrollback ();
 
 			// Render the tile type readout
-			game.Print (0, line++, map.GetTile (player.Location.X, player.Location.Y).Name, RLColor.LightBlue);
+			game.Print (0, 3, map.GetTile (player.Location.X, player.Location.Y).Name, RLColor.LightBlue);
 
 			// Render HP
 			game.Print (50, 0, "HP: " + player.Health.ToString (), RLColor.Red);
@@ -107,7 +85,7 @@ namespace coffee
 					moveVector = Vector2.East;
 					break;
 				case RLKey.Q:
-					RandomQuote ();
+					messages.RandomQuote ();
 					break;
 				case RLKey.Escape:
 					game.Close ();
@@ -115,7 +93,7 @@ namespace coffee
 				}
 				if (moveCollide) {
 					string blockingType = map.GetTile (player.Location + moveVector).Name;
-					messages.Add ("The way is blocked by a " + blockingType);
+					messages.AddMessage ("The way is blocked by a " + blockingType);
 				}
 			}
 		}
