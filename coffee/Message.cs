@@ -15,9 +15,6 @@ namespace coffee
 			MyteriousEvent
 		}
 
-		private static string iconBracket = "[]";
-		private static int iconBracketPoint = 1;
-
 		public RLColor TypeIconColor {
 			get {
 				switch (Type) {
@@ -37,20 +34,23 @@ namespace coffee
 			}
 		}
 
+		private const string iconBracket = "[]";
+		private const int iconBracketPoint = 1;
+
 		public string TypeIcon {
 			get {
 				switch (Type) {
 				case MessageType.Generic:
-					return iconBracket.Insert (iconBracketPoint, "-");
+					return iconBracket.Insert (iconBracketPoint, '-'.ToString ());
 				case MessageType.Buff:
-					return iconBracket.Insert (iconBracketPoint, "^");
+					return iconBracket.Insert (iconBracketPoint, ((char)30).ToString ());
 				case MessageType.Debuff:
-					return iconBracket.Insert (iconBracketPoint, "V");
+					return iconBracket.Insert (iconBracketPoint, ((char)31).ToString ());
 				case MessageType.GoodEvent:
 				case MessageType.BadEvent:
-					return iconBracket.Insert (iconBracketPoint, "!");
+					return iconBracket.Insert (iconBracketPoint, '!'.ToString ());
 				case MessageType.MyteriousEvent:
-					return iconBracket.Insert (iconBracketPoint, "?");
+					return iconBracket.Insert (iconBracketPoint, '?'.ToString ());
 				default:
 					throw new ArgumentException ("Bad message type.");
 				}

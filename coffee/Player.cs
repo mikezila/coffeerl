@@ -11,59 +11,55 @@ namespace coffee
 		West
 	}
 
-	public class Player
+	public class Player : Actor
 	{
-		public string Name { get; private set; }
-
-		public int Health { get; private set; }
-
-		public Vector2 Location { get; private set; }
-
-		private CMap map;
-
-		public Player (CMap map, Vector2 initialLocation, string name)
+		public Player (CMap map, string name)
 		{
 			this.map = map;
 			Health = 100;
-			Location = initialLocation;
+			Location = map.PlayerStart;
 			Name = name;
 		}
 
-		// Returns true if collides with a solid.
-		public bool Move (Direction heading)
+		public Player (CMap map)
 		{
-			switch (heading) {
-			case Direction.North:
-				if (map.IsTileSolid (Location + Vector2.North))
-					return true;
-				else {
-					Location += Vector2.North;
-					return false;
-				}
-			case Direction.South:
-				if (map.IsTileSolid (Location + Vector2.South))
-					return true;
-				else {
-					Location += Vector2.South;
-					return false;
-				}
-			case Direction.East:
-				if (map.IsTileSolid (Location + Vector2.East))
-					return true;
-				else {
-					Location += Vector2.East;
-					return false;
-				}
-			case Direction.West:
-				if (map.IsTileSolid (Location + Vector2.West))
-					return true;
-				else {
-					Location += Vector2.West;
-					return false;
-				}
-			default:
-				throw new ArgumentException ("Bad move direction.");
-			}
+			this.map = map;
+			Health = 100;
+			Location = map.PlayerStart;
+			Name = RandomizeName ();
+		}
+
+		// Random names!
+		Random rand = new Random ();
+
+		private string RandomizeName ()
+		{
+			string[] firstNames = new string[10];
+			string[] lastNames = new string[10];
+
+			firstNames [0] = "Malacai";
+			firstNames [1] = "Guy";
+			firstNames [2] = "Albert";
+			firstNames [3] = "Gregor";
+			firstNames [4] = "J";
+			firstNames [5] = "Alex";
+			firstNames [6] = "Zoe";
+			firstNames [7] = "Nastasha";
+			firstNames [8] = "Meryl";
+			firstNames [9] = "M";
+
+			lastNames [0] = "Cross";
+			lastNames [1] = "Lambert";
+			lastNames [2] = "Lawson";
+			lastNames [3] = "King";
+			lastNames [4] = "Porter";
+			lastNames [5] = "Blade";
+			lastNames [6] = "Guiver";
+			lastNames [7] = "Slamm";
+			lastNames [8] = "Xi";
+			lastNames [9] = "Sly";
+
+			return firstNames [rand.Next (10)] + " " + lastNames [rand.Next (10)];
 		}
 	}
 }

@@ -13,6 +13,10 @@ namespace coffee
 		{
 			this.game = game;
 			messages = new List<Message> ();
+
+			AddMessage ("coffeeRL v0.2 - \"Uppercut\"");
+			AddMessage ("Entering floor 1...");
+			AddMessage ("Prepare yourself!");
 		}
 
 		Random rand = new Random ();
@@ -44,8 +48,6 @@ namespace coffee
 		//TODO: Redo this.
 		public void RenderMessageScrollback ()
 		{
-			if (messages.Count < 3)
-				return;
 			// Render the message scrollback
 			int line = 0;
 			//Oldest
@@ -65,4 +67,3 @@ namespace coffee
 		}
 	}
 }
-

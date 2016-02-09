@@ -49,6 +49,8 @@
     <Compile Include="Player.cs" />
     <Compile Include="MessageSystem.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="Actor.cs" />
+    <Compile Include="Monster.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
