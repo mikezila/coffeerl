@@ -61,6 +61,7 @@
     <Compile Include="Components\StatsComponent.cs" />
     <Compile Include="Components\LocationComponent.cs" />
     <Compile Include="Components\RenderComponent.cs" />
+    <Compile Include="Components\KeyboardInputComponent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

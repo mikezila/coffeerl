@@ -34,7 +34,7 @@ namespace coffee
 
 		void renderActors ()
 		{
-
+			manager.RenderActors ();
 		}
 
 		// Where the top left of the map is drawn in screenspace

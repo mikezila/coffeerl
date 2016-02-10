@@ -20,12 +20,30 @@ namespace coffee
 				Cells [i] = new Cell (map.Tiles [i]);
 
 			Actors = new List<Actor> ();
+
+			Actor player = new Actor ();
+			player.AddComponent<LocationComponent> (new LocationComponent (player, new Vector2 (3, 3)));
+			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Green));
+			player.AddComponent<RenderComponent> (new RenderComponent (player));
+
+			Actors.Add (player);
 		}
 
 		public void UpdateActors ()
 		{
 			foreach (Actor actor in Actors)
 				actor.Update ();
+		}
+
+		Vector2 mapOrigin = new Vector2 (1, 5);
+
+		public void RenderActors ()
+		{
+			foreach (Actor actor in Actors) {
+				if (actor.HasComponent<RenderComponent> ()) {
+					actor.GetComponent<RenderComponent> ().Render (mapOrigin);
+				}
+			}
 		}
 
 		public Cell GetCell (Vector2 location)

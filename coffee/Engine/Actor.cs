@@ -10,12 +10,25 @@ namespace coffee
 
 		public Actor ()
 		{
-
+			Components = new List<Component> ();
 		}
 
 		public T GetComponent<T> ()
 		{
 			return Components.OfType<T> ().First ();
+		}
+
+		public void AddComponent<T> (Component component)
+		{
+			if (Components.OfType<T> ().Count () > 0)
+				throw new ArgumentException ("Trying to add duplicate component");
+			else
+				Components.Add (component);
+		}
+
+		public bool HasComponent<T> ()
+		{
+			return Components.OfType<T> ().Count () > 0;
 		}
 
 		public void Update ()

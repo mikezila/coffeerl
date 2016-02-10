@@ -2,11 +2,11 @@
 
 namespace coffee
 {
-	public class LocationComponent
+	public class LocationComponent : Component
 	{
 		public Vector2 Location { get; private set; }
 
-		public LocationComponent (Vector2 initialLocation)
+		public LocationComponent (Actor parent, Vector2 initialLocation) : base (parent)
 		{
 			Location = initialLocation;
 		}
