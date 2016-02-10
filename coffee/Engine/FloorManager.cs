@@ -31,10 +31,13 @@ namespace coffee
 			Actors.Add (player);
 		}
 
-		public void UpdateActors ()
+		public void UpdateActors (RLKeyPress keypress)
 		{
-			foreach (Actor actor in Actors)
+			foreach (Actor actor in Actors) {
+				if (keypress != null && actor.HasComponent<KeyboardInputComponent> ())
+					actor.GetComponent<KeyboardInputComponent> ().Input (keypress);
 				actor.Update ();
+			}
 		}
 
 		Vector2 mapOrigin = new Vector2 (1, 5);

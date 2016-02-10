@@ -10,9 +10,11 @@ namespace coffee
 
 		public override void Update ()
 		{
-			RLNET.RLKeyPress keypress = Util.Console.Keyboard.GetKeyPress ();
-			if (keypress == null)
-				return;
+
+		}
+
+		public void Input (RLNET.RLKeyPress keypress)
+		{
 			if (keypress.Key == RLNET.RLKey.Q)
 				Util.Messages.AddMessage ("HERP DERP");
 		}

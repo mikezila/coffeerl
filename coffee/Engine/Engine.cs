@@ -52,7 +52,10 @@ namespace coffee
 
 		void gameUpdate (object sender, UpdateEventArgs e)
 		{
-			manager.UpdateActors ();
+			RLKeyPress keypress = Util.Console.Keyboard.GetKeyPress ();
+			if (keypress != null && keypress.Key == RLKey.Escape)
+				Util.Console.Close ();
+			manager.UpdateActors (keypress);
 		}
 
 		void gameRender (object sender, UpdateEventArgs e)
