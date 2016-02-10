@@ -8,6 +8,7 @@ namespace coffee
 		{
 			Strength = monsterStrength;
 			Type = MonsterType.Imp;
+			Name = "Imp";
 			Map = map;
 			Location = initialLocation;
 			Glyph = 'i';

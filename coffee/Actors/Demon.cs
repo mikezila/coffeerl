@@ -8,6 +8,7 @@ namespace coffee
 		{
 			Strength = monsterStrength;
 			Type = MonsterType.Demon;
+			Name = "Demon";
 			Map = map;
 			Location = initialLocation;
 			Glyph = 'd';

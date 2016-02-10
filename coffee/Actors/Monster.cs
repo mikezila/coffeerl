@@ -22,26 +22,6 @@ namespace coffee
 
 		public MonsterType Type { get; protected set; }
 
-		public virtual string MonsterTypeString {
-			get {
-				switch (Type) {
-				case MonsterType.Demon:
-					return "Demon";
-				case MonsterType.Imp:
-					return "Imp";
-				case MonsterType.Zombie:
-					return "Zombie";
-				default:
-					throw new ArgumentException ("Bad monster type.");
-				}
-			}
-		}
-
-		public void Announce ()
-		{
-
-		}
-
 		public void Wander ()
 		{
 			bool moved = false;

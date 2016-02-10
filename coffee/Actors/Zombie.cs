@@ -8,6 +8,7 @@ namespace coffee
 		{
 			Strength = monsterStrength;
 			Type = MonsterType.Zombie;
+			Name = "Zombie";
 			Map = map;
 			Location = initialLocation;
 			Glyph = 'z';

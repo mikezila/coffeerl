@@ -43,18 +43,18 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Engine.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="CMap.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="MessageSystem.cs" />
-    <Compile Include="Message.cs" />
-    <Compile Include="Actor.cs" />
-    <Compile Include="Monster.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="Zombie.cs" />
-    <Compile Include="Imp.cs" />
-    <Compile Include="Demon.cs" />
+    <Compile Include="Actors\Actor.cs" />
+    <Compile Include="Actors\Demon.cs" />
+    <Compile Include="Actors\Imp.cs" />
+    <Compile Include="Actors\Monster.cs" />
+    <Compile Include="Actors\Player.cs" />
+    <Compile Include="Actors\Zombie.cs" />
+    <Compile Include="Engine\CMap.cs" />
+    <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Engine\Message.cs" />
+    <Compile Include="Engine\MessageSystem.cs" />
+    <Compile Include="Engine\Tile.cs" />
+    <Compile Include="Engine\Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -66,5 +66,9 @@
     <None Include="map1.cmap">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actors\" />
+    <Folder Include="Engine\" />
   </ItemGroup>
 </Project>
