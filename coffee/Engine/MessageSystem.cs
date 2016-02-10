@@ -9,9 +9,9 @@ namespace coffee
 		private RLRootConsole game;
 		private List<Message> messages;
 
-		public MessageSystem (RLRootConsole game)
+		public MessageSystem ()
 		{
-			this.game = game;
+			game = Util.Console;
 			messages = new List<Message> ();
 
 			AddMessage ("coffeeRL v0.2 - \"Uppercut\"");

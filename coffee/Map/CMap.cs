@@ -3,36 +3,6 @@ using System.IO;
 
 namespace coffee
 {
-	public class Vector2
-	{
-		public int X { get; set; }
-
-		public int Y{ get; set; }
-
-		public int Size{ get { return X * Y; } }
-
-		public static Vector2 North{ get { return new Vector2 (0, -1); } }
-
-		public static Vector2 South{ get { return new Vector2 (0, 1); } }
-
-		public static Vector2 East{ get { return new Vector2 (1, 0); } }
-
-		public static Vector2 West{ get { return new Vector2 (-1, 0); } }
-
-		public static Vector2 Zero{ get { return new Vector2 (0, 0); } }
-
-		public static Vector2 operator + (Vector2 a, Vector2 b)
-		{
-			return new Vector2 (a.X + b.X, a.Y + b.Y);
-		}
-
-		public Vector2 (int width, int height)
-		{
-			X = width;
-			Y = height;
-		}
-	}
-
 	public class CMap
 	{
 		// Part of header used to ID a coffeeMap file.
@@ -46,7 +16,7 @@ namespace coffee
 
 		public Vector2 PlayerStart { get; private set; }
 
-		Tile[] Tiles{ get; set; }
+		public Tile[] Tiles{ get; private set; }
 
 		public CMap (string mapName)
 		{

@@ -11,11 +11,12 @@ namespace coffee
 		public static void Main ()
 		{
 			RLSettings setup = new RLSettings ();
-			setup.Scale = 2f;
-			setup.BitmapFile = "ascii_8x8.png";
-			setup.CharWidth = setup.CharHeight = 8;
+			setup.Scale = 1f;
+			setup.BitmapFile = "dsc8x12.png";
+			setup.CharWidth = 8;
+			setup.CharHeight = 12;
 			setup.WindowBorder = RLWindowBorder.Fixed;
-			setup.Width = 60;
+			setup.Width = 80;
 			setup.Height = 40;
 			setup.Title = "coffee";
 			game = new RLRootConsole (setup);
