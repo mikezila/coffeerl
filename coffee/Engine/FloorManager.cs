@@ -1,4 +1,5 @@
 ﻿using System;
+using RLNET;
 using System.Collections.Generic;
 
 namespace coffee
@@ -25,6 +26,7 @@ namespace coffee
 			player.AddComponent<LocationComponent> (new LocationComponent (player, new Vector2 (3, 3)));
 			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Green));
 			player.AddComponent<RenderComponent> (new RenderComponent (player));
+			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
 
 			Actors.Add (player);
 		}
@@ -63,43 +65,5 @@ namespace coffee
 			GetCell (destination).Actor = GetCell (origin).Actor;
 			GetCell (origin).RemoveActor ();
 		}
-
-		// Returns false if there is a collision and the move failed.
-		//		public bool MoveActor (Direction heading, Cell actor)
-		//		{
-		//			switch (heading) {
-		//			case Direction.North:
-		//				if (Map.IsTileSolid (Location + Vector2.North))
-		//					return true;
-		//				else {
-		//					Location += Vector2.North;
-		//					return false;
-		//				}
-		//			case Direction.South:
-		//				if (Map.IsTileSolid (Location + Vector2.South))
-		//					return true;
-		//				else {
-		//					Location += Vector2.South;
-		//					return false;
-		//				}
-		//			case Direction.East:
-		//				if (Map.IsTileSolid (Location + Vector2.East))
-		//					return true;
-		//				else {
-		//					Location += Vector2.East;
-		//					return false;
-		//				}
-		//			case Direction.West:
-		//				if (Map.IsTileSolid (Location + Vector2.West))
-		//					return true;
-		//				else {
-		//					Location += Vector2.West;
-		//					return false;
-		//				}
-		//			default:
-		//				throw new ArgumentException ("Bad move direction.");
-		//			}
-		//		}
 	}
 }
-
