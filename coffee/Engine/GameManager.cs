@@ -10,6 +10,8 @@ namespace coffee
 
 		GameMap Map { get; set; }
 
+		GameObject Player { get; set; }
+
 		public GameManager ()
 		{
 			Map = new GameMap ("map1.cmap");
@@ -21,6 +23,9 @@ namespace coffee
 			player.AddComponent<RenderComponent> (new RenderComponent (player));
 			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
 			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
+			player.AddComponent<FactionComponent> (new FactionComponent (player, Faction.Player));
+
+			Player = player;
 
 			Objects.Add (MonsterMaker (new Vector2 (4, 2)));
 
@@ -38,6 +43,7 @@ namespace coffee
 			monster.AddComponent<NameComponent> (new NameComponent (monster, "Zombie"));
 			monster.AddComponent<MovementComponent> (new MovementComponent (monster, Map));
 			monster.AddComponent<AIInputComponent> (new AIInputComponent (monster));
+			monster.AddComponent<FactionComponent> (new FactionComponent (monster, Faction.Monster));
 
 			return monster;
 		}
@@ -49,6 +55,12 @@ namespace coffee
 					actor.GetComponent<KeyboardInputComponent> ().Input (keypress);
 				actor.Update ();
 			}
+		}
+
+		public void RenderUI ()
+		{
+			//Tile type readout
+			Util.Console.Print (0, 3, Map.GetCell (Player.GetComponent<LocationComponent> ().Location).Tile.Name, RLColor.Cyan);
 		}
 
 		public void Render ()

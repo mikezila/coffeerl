@@ -20,16 +20,7 @@ namespace coffee
 		void renderUI ()
 		{
 			Util.Messages.RenderMessageScrollback ();
-
-			// Render the tile type readout
-			//game.Print (0, 3, map.GetTile (player.Location.X, player.Location.Y).Name, RLColor.LightBlue);
-
-			// Render the player's name
-			//game.Print (game.Width - player.Name.Length, 3, player.Name, RLColor.White);
-
-			// Render HP
-			//game.Print (game.Width - 7, 0, "HP: " + player.Health.ToString (), RLColor.Red);
-			//game.Print (game.Width - 7, 1, "AP: 000", RLColor.Blue);
+			manager.RenderUI ();
 		}
 
 		void renderGame ()
