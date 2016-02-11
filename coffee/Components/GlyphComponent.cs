@@ -5,7 +5,9 @@ namespace coffee
 {
 	public class GlyphComponent : Component
 	{
-		public char Glyph { get; private set; }
+		public RLCell Cell { get { return new RLCell (BackGroundColor, Color, GlyphChar); } }
+
+		public char GlyphChar { get; private set; }
 
 		public RLColor BackGroundColor { get; private set; }
 
@@ -13,7 +15,7 @@ namespace coffee
 
 		public GlyphComponent (GameObject parent, char glyph, RLColor color, RLColor backGroundColor) : base (parent)
 		{
-			Glyph = glyph;
+			GlyphChar = glyph;
 			Color = color;
 			BackGroundColor = backGroundColor;
 		}

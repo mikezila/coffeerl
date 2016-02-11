@@ -18,7 +18,7 @@ namespace coffee
 			Objects = new List<GameObject> ();
 
 			GameObject player = new GameObject ();
-			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, new Vector2 (3, 3)));
+			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, new Vector2 (3, 3), true));
 			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Black));
 			player.AddComponent<RenderComponent> (new RenderComponent (player));
 			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
@@ -37,7 +37,7 @@ namespace coffee
 		private GameObject MonsterMaker (Vector2 initialLocation)
 		{
 			GameObject monster = new GameObject ();
-			monster.AddComponent<LocationComponent> (new LocationComponent (monster, Map, initialLocation));
+			monster.AddComponent<LocationComponent> (new LocationComponent (monster, Map, initialLocation, true));
 			monster.AddComponent<GlyphComponent> (new GlyphComponent (monster, 'Z', RLColor.Green, RLColor.Black));
 			monster.AddComponent<RenderComponent> (new RenderComponent (monster));
 			monster.AddComponent<NameComponent> (new NameComponent (monster, "Zombie"));
@@ -60,7 +60,7 @@ namespace coffee
 		public void RenderUI ()
 		{
 			//Tile type readout
-			Util.Console.Print (0, 3, Map.GetCell (Player.GetComponent<LocationComponent> ().Location).Tile.Name, RLColor.Cyan);
+			Util.Console.Print (0, 3, Map.GetCell (Player.GetComponent<LocationComponent> ().Location).Tile.GetComponent<NameComponent> ().Name, RLColor.Cyan);
 		}
 
 		public void Render ()

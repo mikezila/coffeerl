@@ -15,18 +15,13 @@ namespace coffee
 			Name = name;
 		}
 
-		public NameComponent (GameObject parent) : base (parent)
-		{
-			Name = RandomName ();
-		}
-
 		public void Randomize ()
 		{
-			Name = RandomName ();
-			Title = RandomTitle ();
+			RandomizeName ();
+			RandomizeTitle ();
 		}
 
-		private static string RandomTitle ()
+		public void RandomizeTitle ()
 		{
 			string[] titles = new string[7];
 
@@ -38,10 +33,10 @@ namespace coffee
 			titles [5] = "the Champion";
 			titles [6] = "Title Holder";
 
-			return titles [Util.RandomNumber (0, 7)];
+			Title = titles [Util.RandomNumber (0, 7)];
 		}
 
-		private static string RandomName ()
+		public void RandomizeName ()
 		{
 			string[] firstNames = new string[10];
 			string[] lastNames = new string[10];
@@ -68,7 +63,7 @@ namespace coffee
 			lastNames [8] = "Xi";
 			lastNames [9] = "Sly";
 
-			return firstNames [Util.RandomNumber (1, 10)] + " " + lastNames [Util.RandomNumber (1, 10)];
+			Name = firstNames [Util.RandomNumber (1, 10)] + " " + lastNames [Util.RandomNumber (1, 10)];
 		}
 	}
 }

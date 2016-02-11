@@ -6,12 +6,15 @@ namespace coffee
 	{
 		public Vector2 Location { get; private set; }
 
+		public bool Solid { get; set; }
+
 		GameMap Map{ get; set; }
 
-		public LocationComponent (GameObject parent, GameMap map, Vector2 initialLocation) : base (parent)
+		public LocationComponent (GameObject parent, GameMap map, Vector2 initialLocation, bool solid) : base (parent)
 		{
 			Map = map;
 			Location = initialLocation;
+			Solid = solid;
 			Spawn (initialLocation);
 		}
 

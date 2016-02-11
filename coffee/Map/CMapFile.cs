@@ -16,29 +16,19 @@ namespace coffee
 
 		public Vector2 PlayerStart { get; private set; }
 
-		public Tile[] Tiles{ get; private set; }
+		public char[] Tiles{ get; private set; }
 
 		public CMapFile (string mapName)
 		{
 			LoadMap (mapName);
 		}
 
-		public bool IsTileSolid (Vector2 location)
-		{
-			return IsTileSolid (location.X, location.Y);
-		}
-
-		public bool IsTileSolid (int x, int y)
-		{
-			return GetTile (x, y).Solid;
-		}
-
-		public Tile GetTile (Vector2 location)
+		public char GetTile (Vector2 location)
 		{
 			return GetTile (location.X, location.Y);
 		}
 
-		public Tile GetTile (int x, int y)
+		public char GetTile (int x, int y)
 		{
 			if (x >= MapSize.X || x < 0 || y >= MapSize.Y || y < 0)
 				throw new ArgumentException ("Map lookup out of range.");
@@ -61,7 +51,7 @@ namespace coffee
 				int Width = int.Parse (mapSize [0]);
 				int Height = int.Parse (mapSize [1]);
 				MapSize = new Vector2 (Width, Height);
-				Tiles = new Tile[MapSize.Size];
+				Tiles = new char[MapSize.Size];
 
 				//Grab player start
 				string[] playerStart = file.ReadLine ().Split ('=') [1].Split (',');
@@ -76,7 +66,7 @@ namespace coffee
 					if (subject == '\n')
 						continue;
 					else {
-						Tiles [currentTile] = new Tile ((Tile.TileType)int.Parse (subject.ToString ()));
+						Tiles [currentTile] = subject;
 						currentTile++;
 					}
 				}

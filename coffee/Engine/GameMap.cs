@@ -1,4 +1,5 @@
 ﻿using System;
+using RLNET;
 
 namespace coffee
 {
@@ -8,15 +9,69 @@ namespace coffee
 
 		public Vector2 Size { get; private set; }
 
-		static readonly Vector2 mapOrigin = new Vector2 (1, 5);
-
 		public GameMap (string mapName)
 		{
 			CMapFile map = new CMapFile (mapName);
 			Cells = new Cell[map.MapSize.Size];
 			Size = map.MapSize;
-			for (int i = 0; i < Size.Size; i++)
-				Cells [i] = new Cell (map.Tiles [i]);
+			for (int i = 0; i < Size.Size; i++) {
+				Cells [i] = new Cell ();
+				Cells [i].SetTile (CreateTile (map.Tiles [i], i));
+			}
+		}
+
+		private GameObject CreateTile (char primative, int location)
+		{
+			GameObject tile = new GameObject ();
+			tile.AddComponent<RenderComponent> (new RenderComponent (tile));
+
+			switch (primative) {
+			case '0':
+				tile.AddComponent<LocationComponent> (new LocationComponent (tile, this, CellNumberToVector2 (location), true));
+				tile.AddComponent<NameComponent> (new NameComponent (tile, "Floor"));
+				tile.AddComponent<GlyphComponent> (new GlyphComponent (tile, ' ', RLColor.Black, RLColor.Black));
+				break;
+			case '1':
+				tile.AddComponent<LocationComponent> (new LocationComponent (tile, this, CellNumberToVector2 (location), false));
+				tile.AddComponent<NameComponent> (new NameComponent (tile, "Floor"));
+				tile.AddComponent<GlyphComponent> (new GlyphComponent (tile, '.', RLColor.White, RLColor.Black));
+				break;
+			case '2':
+				tile.AddComponent<LocationComponent> (new LocationComponent (tile, this, CellNumberToVector2 (location), false));
+				tile.AddComponent<NameComponent> (new NameComponent (tile, "Floor (Wet)"));
+				tile.AddComponent<GlyphComponent> (new GlyphComponent (tile, '.', RLColor.Blue, RLColor.Black));
+				break;
+			case '3':
+				tile.AddComponent<LocationComponent> (new LocationComponent (tile, this, CellNumberToVector2 (location), false));
+				tile.AddComponent<NameComponent> (new NameComponent (tile, "Floor (Bloody)"));
+				tile.AddComponent<GlyphComponent> (new GlyphComponent (tile, '.', RLColor.Red, RLColor.Black));
+				break;
+			case '5':
+				tile.AddComponent<LocationComponent> (new LocationComponent (tile, this, CellNumberToVector2 (location), true));
+				tile.AddComponent<NameComponent> (new NameComponent (tile, "Wall"));
+				tile.AddComponent<GlyphComponent> (new GlyphComponent (tile, '#', RLColor.White, RLColor.Black));
+				break;
+			case '6':
+				tile.AddComponent<LocationComponent> (new LocationComponent (tile, this, CellNumberToVector2 (location), true));
+				tile.AddComponent<NameComponent> (new NameComponent (tile, "Tree"));
+				tile.AddComponent<GlyphComponent> (new GlyphComponent (tile, '#', RLColor.Green, RLColor.Black));
+				break;
+			case '7':
+				tile.AddComponent<LocationComponent> (new LocationComponent (tile, this, CellNumberToVector2 (location), true));
+				tile.AddComponent<NameComponent> (new NameComponent (tile, "Crate"));
+				tile.AddComponent<GlyphComponent> (new GlyphComponent (tile, '#', RLColor.Brown, RLColor.Black));
+				break;
+			default:
+				throw new ArgumentException ("Invalid tile type: " + primative);
+			}
+
+			return tile;
+
+		}
+
+		private Vector2 CellNumberToVector2 (int i)
+		{
+			return new Vector2 (i % Size.X, i / Size.X);
 		}
 
 		public Cell GetCell (Vector2 location)
@@ -39,12 +94,16 @@ namespace coffee
 
 		public void Render ()
 		{
-			for (int row = 0; row < Size.Y; row++) {
-				for (int col = 0; col < Size.X; col++) {
-					Tile tile = GetCell (col, row).Tile;
-					Util.Console.Set (mapOrigin.X + col, mapOrigin.Y + row, tile.Color, null, tile.Glyph);
-				}
+			foreach (Cell cell in Cells) {
+				cell.Tile.GetComponent<RenderComponent> ().Render ();
 			}
+
+//			for (int row = 0; row < Size.Y; row++) {
+//				for (int col = 0; col < Size.X; col++) {
+//					LegacyTile tile = GetCell (col, row).Tile;
+//					Util.Console.Set (mapOrigin.X + col, mapOrigin.Y + row, tile.Color, null, tile.Glyph);
+//				}
+//			}
 		}
 	}
 }

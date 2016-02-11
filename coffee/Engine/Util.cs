@@ -43,7 +43,9 @@ namespace coffee
 
 	public static class Util
 	{
+		// Handy semi-consts
 		public static readonly Vector2 mapOrigin = new Vector2 (1, 5);
+		public static readonly RLNET.RLCell emptyCell = new RLNET.RLCell (RLNET.RLColor.Black, RLNET.RLColor.White, ' ');
 
 		private static RLNET.RLRootConsole _console;
 		private static MessageSystem _messages;

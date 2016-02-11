@@ -49,7 +49,6 @@
     <Compile Include="Engine\MessageSystem.cs" />
     <Compile Include="Engine\Util.cs" />
     <Compile Include="Map\Cell.cs" />
-    <Compile Include="Map\Tile.cs" />
     <Compile Include="Item\Item.cs" />
     <Compile Include="Components\NameComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
