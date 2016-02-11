@@ -1,4 +1,5 @@
 ﻿using System;
+using RLNET;
 
 namespace coffee
 {
@@ -10,11 +11,20 @@ namespace coffee
 
 		public void Input (RLNET.RLKeyPress keypress)
 		{
-			if (keypress.Key == RLNET.RLKey.Q)
-				Util.Messages.RandomQuote ();
-
-			if (keypress.Key == RLNET.RLKey.W)
+			switch (keypress.Key) {
+			case RLKey.W:
 				Parent.GetComponent<MovementComponent> ().Move (Direction.North);
+				break;
+			case RLKey.S:
+				Parent.GetComponent<MovementComponent> ().Move (Direction.South);
+				break;
+			case RLKey.A:
+				Parent.GetComponent<MovementComponent> ().Move (Direction.West);
+				break;
+			case RLKey.D:
+				Parent.GetComponent<MovementComponent> ().Move (Direction.East);
+				break;
+			}
 		}
 	}
 }

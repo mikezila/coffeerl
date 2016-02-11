@@ -64,6 +64,7 @@
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\GameMap.cs" />
     <Compile Include="Map\CMapFile.cs" />
+    <Compile Include="Components\AIInputComponent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

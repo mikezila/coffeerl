@@ -16,13 +16,13 @@ namespace coffee
 			Objects = new List<GameObject> ();
 
 			GameObject player = new GameObject ();
-			player.AddComponent<LocationComponent> (new LocationComponent (player, new Vector2 (3, 3)));
+			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, new Vector2 (3, 3)));
 			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Black));
 			player.AddComponent<RenderComponent> (new RenderComponent (player));
 			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
 			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
 
-			Objects.Add (MonsterMaker (player.GetComponent<LocationComponent> ().Location + new Vector2 (1, 1)));
+			Objects.Add (MonsterMaker (new Vector2 (4, 2)));
 
 			Objects.Add (player);
 		}
@@ -32,10 +32,12 @@ namespace coffee
 		private GameObject MonsterMaker (Vector2 initialLocation)
 		{
 			GameObject monster = new GameObject ();
-			monster.AddComponent<LocationComponent> (new LocationComponent (monster, initialLocation));
+			monster.AddComponent<LocationComponent> (new LocationComponent (monster, Map, initialLocation));
 			monster.AddComponent<GlyphComponent> (new GlyphComponent (monster, 'Z', RLColor.Green, RLColor.Black));
 			monster.AddComponent<RenderComponent> (new RenderComponent (monster));
 			monster.AddComponent<NameComponent> (new NameComponent (monster, "Zombie"));
+			monster.AddComponent<MovementComponent> (new MovementComponent (monster, Map));
+			monster.AddComponent<AIInputComponent> (new AIInputComponent (monster));
 			return monster;
 		}
 
