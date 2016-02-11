@@ -19,8 +19,8 @@ namespace coffee
 			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, new Vector2 (3, 3)));
 			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Black));
 			player.AddComponent<RenderComponent> (new RenderComponent (player));
-			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
 			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
+			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
 
 			Objects.Add (MonsterMaker (new Vector2 (4, 2)));
 
@@ -38,6 +38,7 @@ namespace coffee
 			monster.AddComponent<NameComponent> (new NameComponent (monster, "Zombie"));
 			monster.AddComponent<MovementComponent> (new MovementComponent (monster, Map));
 			monster.AddComponent<AIInputComponent> (new AIInputComponent (monster));
+
 			return monster;
 		}
 

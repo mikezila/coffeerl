@@ -3,6 +3,7 @@ using RLNET;
 
 namespace coffee
 {
+	//TODO: Redo this class.  Lots of enum wankery when it could probably be composed on the fly when generated instead.
 	public class Tile
 	{
 		// Types with a type higher than this are "solid" and cannot be moved through.

@@ -4,42 +4,53 @@ namespace coffee
 {
 	public class AIInputComponent : Component
 	{
+		public bool Awake { get; private set; }
+
 		public AIInputComponent (GameObject parent) : base (parent)
 		{
+			Awake = true;
+		}
+
+		public void Sleep ()
+		{
+			Awake = false;
+		}
+
+		public void Wake ()
+		{
+			Awake = true;
 		}
 
 		public override void Update ()
 		{
+			if (!Awake)
+				return;
+
 			Wander ();
 		}
-
-		int stepCount = 0;
 
 		public void Wander ()
 		{
 			MovementComponent Mover = Parent.GetComponent<MovementComponent> ();
-			bool moved = false;
-			stepCount++;
-			Util.Messages.AddMessage ("Stepped " + stepCount.ToString () + " times.");
-			while (!moved) {
-				switch (Util.RandomNumber (0, 4)) {
-				case 0:
-					moved = !Mover.Move (Direction.North);
-					break;
-				case 1:
-					moved = !Mover.Move (Direction.South);
-					break;
-				case 2:
-					moved = !Mover.Move (Direction.East);
-					break;
-				case 3:
-					moved = !Mover.Move (Direction.West);
-					break;
-				default:
-					throw new Exception ("Picking a random direction has gone terribly wrong.");
-				}
+
+			switch (Util.RandomNumber (0, 4)) {
+			case 0:
+				Mover.Move (Direction.North);
+				break;
+			case 1:
+				Mover.Move (Direction.South);
+				break;
+			case 2:
+				Mover.Move (Direction.East);
+				break;
+			case 3:
+				Mover.Move (Direction.West);
+				break;
+			default:
+				throw new Exception ("Picking a random direction has gone terribly wrong.");
 			}
 		}
 	}
 }
+
 

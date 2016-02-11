@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace coffee
 {
-	public class GameObject
+	public sealed class GameObject
 	{
 		public List<Component> Components { get; private set; }
 

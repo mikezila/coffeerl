@@ -6,6 +6,10 @@ namespace coffee
 	{
 		public string Name { get; private set; }
 
+		public string Title { get; private set; }
+
+		public string NameAndTitle { get { return Name + ", " + Title; } }
+
 		public NameComponent (GameObject parent, string name) : base (parent)
 		{
 			Name = name;
@@ -19,6 +23,22 @@ namespace coffee
 		public void Randomize ()
 		{
 			Name = RandomName ();
+			Title = RandomTitle ();
+		}
+
+		private static string RandomTitle ()
+		{
+			string[] titles = new string[7];
+
+			titles [0] = "the Uncharitable";
+			titles [1] = "the Daring";
+			titles [2] = "Collector of Bones";
+			titles [3] = "Executor";
+			titles [4] = "Keeper of Blades";
+			titles [5] = "the Champion";
+			titles [6] = "Title Holder";
+
+			return titles [Util.RandomNumber (0, 7)];
 		}
 
 		private static string RandomName ()
