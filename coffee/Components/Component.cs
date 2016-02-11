@@ -4,9 +4,9 @@ namespace coffee
 {
 	public abstract class Component
 	{
-		public Actor Parent { get; private set; }
+		public GameObject Parent { get; private set; }
 
-		public Component (Actor parent)
+		public Component (GameObject parent)
 		{
 			Parent = parent;
 		}

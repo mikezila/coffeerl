@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace coffee
 {
-	public class Actor
+	public class GameObject
 	{
 		public List<Component> Components { get; private set; }
 
-		public Actor ()
+		public GameObject ()
 		{
 			Components = new List<Component> ();
 		}

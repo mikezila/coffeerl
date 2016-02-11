@@ -4,9 +4,9 @@ namespace coffee
 {
 	public class LocationComponent : Component
 	{
-		public Vector2 Location { get; private set; }
+		public Vector2 Location { get; set; }
 
-		public LocationComponent (Actor parent, Vector2 initialLocation) : base (parent)
+		public LocationComponent (GameObject parent, Vector2 initialLocation) : base (parent)
 		{
 			Location = initialLocation;
 		}

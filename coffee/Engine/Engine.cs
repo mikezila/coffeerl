@@ -6,13 +6,13 @@ namespace coffee
 {
 	public class Engine
 	{
-		private FloorManager manager;
+		private GameManager manager;
 
 		public Engine (RLRootConsole console)
 		{
 			Util.Console = console;
 			Util.Messages = new MessageSystem ();
-			manager = new FloorManager (new CMap ("map1.cmap"));
+			manager = new GameManager ();
 			Util.Console.Update += gameUpdate;
 			Util.Console.Render += gameRender;
 		}
@@ -32,38 +32,29 @@ namespace coffee
 			//game.Print (game.Width - 7, 1, "AP: 000", RLColor.Blue);
 		}
 
-		void renderActors ()
+		void renderGame ()
 		{
-			manager.RenderActors ();
-		}
-
-		// Where the top left of the map is drawn in screenspace
-		Vector2 mapOrigin = new Vector2 (1, 5);
-
-		void renderMap ()
-		{
-			for (int row = 0; row < manager.Size.Y; row++) {
-				for (int col = 0; col < manager.Size.X; col++) {
-					Tile tile = manager.GetCell (col, row).Tile;
-					Util.Console.Set (mapOrigin.X + col, mapOrigin.Y + row, tile.Color, null, tile.Glyph);
-				}
-			}
+			manager.Render ();
 		}
 
 		void gameUpdate (object sender, UpdateEventArgs e)
 		{
+			// Poll for a keypress
 			RLKeyPress keypress = Util.Console.Keyboard.GetKeyPress ();
+
+			// Before anything else, check if we should just quit.
 			if (keypress != null && keypress.Key == RLKey.Escape)
 				Util.Console.Close ();
-			manager.UpdateActors (keypress);
+
+			// Send the keypress into the GameManger's update cycle
+			manager.Update (keypress);
 		}
 
 		void gameRender (object sender, UpdateEventArgs e)
 		{
 			Util.Console.Clear ();
-			renderMap ();
 			renderUI ();
-			renderActors ();
+			renderGame ();
 			Util.Console.Draw ();
 		}
 	}

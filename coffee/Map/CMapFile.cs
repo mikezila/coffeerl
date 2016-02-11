@@ -3,7 +3,7 @@ using System.IO;
 
 namespace coffee
 {
-	public class CMap
+	public class CMapFile
 	{
 		// Part of header used to ID a coffeeMap file.
 		const string Magic = "coffee";
@@ -12,13 +12,13 @@ namespace coffee
 
 		public String Name { get; private set; }
 
-		public Vector2 Size { get; private set; }
+		public Vector2 MapSize { get; private set; }
 
 		public Vector2 PlayerStart { get; private set; }
 
 		public Tile[] Tiles{ get; private set; }
 
-		public CMap (string mapName)
+		public CMapFile (string mapName)
 		{
 			LoadMap (mapName);
 		}
@@ -40,9 +40,9 @@ namespace coffee
 
 		public Tile GetTile (int x, int y)
 		{
-			if (x >= Size.X || x < 0 || y >= Size.Y || y < 0)
+			if (x >= MapSize.X || x < 0 || y >= MapSize.Y || y < 0)
 				throw new ArgumentException ("Map lookup out of range.");
-			return Tiles [y * Size.X + x];
+			return Tiles [y * MapSize.X + x];
 		}
 
 		void LoadMap (string mapName)
@@ -60,8 +60,8 @@ namespace coffee
 				string[] mapSize = file.ReadLine ().Split ('=') [1].Split ('x');
 				int Width = int.Parse (mapSize [0]);
 				int Height = int.Parse (mapSize [1]);
-				Size = new Vector2 (Width, Height);
-				Tiles = new Tile[Size.Size];
+				MapSize = new Vector2 (Width, Height);
+				Tiles = new Tile[MapSize.Size];
 
 				//Grab player start
 				string[] playerStart = file.ReadLine ().Split ('=') [1].Split (',');
@@ -71,7 +71,7 @@ namespace coffee
 
 				//Read in map data
 				int currentTile = 0;
-				while (currentTile < Size.Size) {
+				while (currentTile < MapSize.Size) {
 					char subject = (char)file.Read ();
 					if (subject == '\n')
 						continue;

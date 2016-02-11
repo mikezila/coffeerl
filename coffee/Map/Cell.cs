@@ -6,7 +6,7 @@ namespace coffee
 	{
 		public Tile Tile { get; private set; }
 
-		public Actor Actor { get; set; }
+		public GameObject Actor { get; set; }
 
 		public Item Item { get; set; }
 
@@ -15,11 +15,18 @@ namespace coffee
 			Tile = tile;
 		}
 
-		public void RemoveActor ()
+		public bool Blocked 
+		{ get { return Tile.Solid || Actor != null; } }
+
+		public void ClearActor ()
 		{
 			Actor = null;
 		}
 
+		public void ClearItem ()
+		{
+			Item = null;
+		}
 	}
 }
 

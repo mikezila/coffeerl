@@ -11,7 +11,7 @@ namespace coffee
 
 		public RLColor Color { get; private set; }
 
-		public GlyphComponent (Actor parent, char glyph, RLColor color, RLColor backGroundColor) : base (parent)
+		public GlyphComponent (GameObject parent, char glyph, RLColor color, RLColor backGroundColor) : base (parent)
 		{
 			Glyph = glyph;
 			Color = color;

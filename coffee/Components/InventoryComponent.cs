@@ -7,7 +7,7 @@ namespace coffee
 	{
 		public List<Item> Inventory = new List<Item> ();
 
-		public InventoryComponent (Actor parent) : base (parent)
+		public InventoryComponent (GameObject parent) : base (parent)
 		{
 
 		}

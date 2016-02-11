@@ -49,11 +49,8 @@
     <Compile Include="Engine\MessageSystem.cs" />
     <Compile Include="Engine\Util.cs" />
     <Compile Include="Map\Cell.cs" />
-    <Compile Include="Map\CMap.cs" />
     <Compile Include="Map\Tile.cs" />
     <Compile Include="Item\Item.cs" />
-    <Compile Include="Engine\FloorManager.cs" />
-    <Compile Include="Engine\Actor.cs" />
     <Compile Include="Components\NameComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Components\Component.cs" />
@@ -62,6 +59,11 @@
     <Compile Include="Components\LocationComponent.cs" />
     <Compile Include="Components\RenderComponent.cs" />
     <Compile Include="Components\KeyboardInputComponent.cs" />
+    <Compile Include="Components\MovementComponent.cs" />
+    <Compile Include="Engine\GameManager.cs" />
+    <Compile Include="Engine\GameObject.cs" />
+    <Compile Include="Engine\GameMap.cs" />
+    <Compile Include="Map\CMapFile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
