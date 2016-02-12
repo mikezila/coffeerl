@@ -18,11 +18,8 @@ namespace coffee
 				return;
 
 			Vector2 location = Parent.GetComponent<LocationComponent> ().Location;
-			RLColor color = Parent.GetComponent<GlyphComponent> ().Color;
-			RLColor backgroundColor = Parent.GetComponent<GlyphComponent> ().BackGroundColor;
-			char glyph = Parent.GetComponent<GlyphComponent> ().GlyphChar;
 
-			Util.Console.Set (Util.mapOrigin.X + location.X, Util.mapOrigin.Y + location.Y, color, backgroundColor, glyph);
+			Util.Console.Set (Util.mapOrigin.X + location.X, Util.mapOrigin.Y + location.Y, Parent.GetComponent<GlyphComponent> ().Cell);
 		}
 	}
 }
