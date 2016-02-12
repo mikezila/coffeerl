@@ -66,13 +66,12 @@
     <Compile Include="Components\AIInputComponent.cs" />
     <Compile Include="Components\FactionComponent.cs" />
     <Compile Include="Components\VisionComponent.cs" />
+    <Compile Include="Components\GameFlowComponent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="ascii_8x8.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="ascii_8x8.png" />
     <None Include="OpenTK.dll.config" />
     <None Include="map1.cmap">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

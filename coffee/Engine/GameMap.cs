@@ -9,10 +9,13 @@ namespace coffee
 
 		public Vector2 Size { get; private set; }
 
+		public Vector2 PlayerStart { get; private set; }
+
 		public GameMap (string mapName)
 		{
 			CMapFile map = new CMapFile (mapName);
 			Cells = new Cell[map.MapSize.Size];
+			PlayerStart = map.PlayerStart;
 			Size = map.MapSize;
 			for (int i = 0; i < Size.Size; i++) {
 				Cells [i] = new Cell ();

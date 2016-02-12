@@ -18,13 +18,14 @@ namespace coffee
 			Objects = new List<GameObject> ();
 
 			GameObject player = new GameObject ();
-			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, new Vector2 (20, 3), true));
+			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, Map.PlayerStart, true));
 			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Black));
 			player.AddComponent<RenderComponent> (new RenderComponent (player));
 			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
 			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
 			player.AddComponent<FactionComponent> (new FactionComponent (player, Faction.Player));
 			player.AddComponent<VisionComponent> (new VisionComponent (player, Map, 4));
+			player.AddComponent<GameFlowComponent> (new GameFlowComponent (player));
 
 			Player = player;
 
@@ -60,11 +61,19 @@ namespace coffee
 			return monster;
 		}
 
+		//TODO: Undo this hack.  It's just in place as an experiment.
 		public void Update (RLKeyPress keypress)
 		{
+			Player.GetComponent<GameFlowComponent> ().TurnBegins ();
+			Player.Update ();
+			if (keypress != null)
+				Player.GetComponent<KeyboardInputComponent> ().Input (keypress);
+			if (Player.GetComponent<GameFlowComponent> ().StopFlow)
+				return;
+
 			foreach (GameObject actor in Objects) {
-				if (keypress != null && actor.HasComponent<KeyboardInputComponent> ())
-					actor.GetComponent<KeyboardInputComponent> ().Input (keypress);
+//				if (keypress != null && actor.HasComponent<KeyboardInputComponent> ())
+//					actor.GetComponent<KeyboardInputComponent> ().Input (keypress);
 				actor.Update ();
 			}
 		}

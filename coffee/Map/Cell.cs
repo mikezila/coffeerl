@@ -37,7 +37,7 @@ namespace coffee
 		public void UnseeTile ()
 		{
 			if (Vision != VisionState.Visible)
-				throw new Exception ("Tried to unsee a tile that is not visible.");
+				return;
 			else
 				Vision = VisionState.Seen;
 		}
