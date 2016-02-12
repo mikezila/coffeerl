@@ -2,7 +2,7 @@
 A simple roguelike project
 
 ## What's this?
-An attempt at making a "coffeebreak" roguelike.  I want the game to be simple, easy to understand, and above all else easy to pick up and put down as needed. I love the genre, but often times what starts as a quick game of just clearing a few floors ends up as a mind-game of juggling gear, keeping track of many skills/classes/traits, many monster types, etc.  What if you just have ten minutes to kill while you're on break?  What if you're slogging through some code and need to un-cook your brain for a while?  That's the niche I intend to aim for.  The minimal ammount of stats, gear options, and monsters to make a game feel full and fun, without making it feel like you're splitting the atom.
+An attempt at making a "coffeebreak" roguelike.  I want the game to be simple, easy to understand, and above all else easy to pick up and put down as needed. I love the genre, but often times what starts as a quick game of just clearing a few floors ends up as a mind-game of juggling gear, keeping track of many skills/classes/traits, many monster types, etc.  What if you just have ten minutes to kill while you're on break?  What if you're slogging through some code and need to un-cook your brain for a while?  That's the niche I intend to aim for.  The minimal number of stats, gear options, and monsters to make a game feel full and fun, without making it feel like you're splitting the atom.
 
 ## How did you make this?
 It's all C# using the [RLNET](https://bitbucket.org/clarktravism/rlnet/) library.  Check it out, it's awesome.
