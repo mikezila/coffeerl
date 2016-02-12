@@ -14,7 +14,7 @@ namespace coffee
 			game = Util.Console;
 			messages = new List<Message> ();
 
-			AddMessage ("coffeeRL v0.2 - \"Uppercut\"");
+			AddMessage ("coffeeRL v0.5 - \"Backfist\"");
 			AddMessage ("Entering floor 1...");
 			AddMessage ("Prepare yourself!");
 		}

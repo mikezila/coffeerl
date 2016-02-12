@@ -17,14 +17,29 @@ namespace coffee
 
 		public Item Item { get; set; }
 
+		public VisionState Vision { get; private set; }
+
 		public Cell ()
 		{
-
+			Vision = VisionState.Hidden;
 		}
 
 		public void SetTile (GameObject tile)
 		{
 			Tile = tile;
+		}
+
+		public void SeeTile ()
+		{
+			Vision = VisionState.Visible;
+		}
+
+		public void UnseeTile ()
+		{
+			if (Vision != VisionState.Visible)
+				throw new Exception ("Tried to unsee a tile that is not visible.");
+			else
+				Vision = VisionState.Seen;
 		}
 
 		public bool Blocked { 

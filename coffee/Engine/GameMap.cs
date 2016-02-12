@@ -64,7 +64,7 @@ namespace coffee
 			default:
 				throw new ArgumentException ("Invalid tile type: " + primative);
 			}
-
+				
 			return tile;
 
 		}
@@ -95,15 +95,9 @@ namespace coffee
 		public void Render ()
 		{
 			foreach (Cell cell in Cells) {
-				cell.Tile.GetComponent<RenderComponent> ().Render ();
+				if (cell.Vision == Cell.VisionState.Visible)
+					cell.Tile.GetComponent<RenderComponent> ().Render ();
 			}
-
-//			for (int row = 0; row < Size.Y; row++) {
-//				for (int col = 0; col < Size.X; col++) {
-//					LegacyTile tile = GetCell (col, row).Tile;
-//					Util.Console.Set (mapOrigin.X + col, mapOrigin.Y + row, tile.Color, null, tile.Glyph);
-//				}
-//			}
 		}
 	}
 }

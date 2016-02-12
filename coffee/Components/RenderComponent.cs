@@ -14,12 +14,22 @@ namespace coffee
 
 		public void Render ()
 		{
-			if (!Enabled)
+			Cell.VisionState visibility = Parent.GetComponent<LocationComponent> ().Visibility;
+			if (!Enabled || visibility == Cell.VisionState.Hidden)
 				return;
 
 			Vector2 location = Parent.GetComponent<LocationComponent> ().Location;
 
-			Util.Console.Set (Util.mapOrigin.X + location.X, Util.mapOrigin.Y + location.Y, Parent.GetComponent<GlyphComponent> ().Cell);
+			switch (visibility) {
+			case Cell.VisionState.Seen:
+				Util.Console.Set (Util.mapOrigin.X + location.X, Util.mapOrigin.Y + location.Y, Parent.GetComponent<GlyphComponent> ().Cell);
+				break;
+			case Cell.VisionState.Visible:
+				Util.Console.Set (Util.mapOrigin.X + location.X, Util.mapOrigin.Y + location.Y, Parent.GetComponent<GlyphComponent> ().Cell);
+				break;
+			default:
+				throw new ArgumentOutOfRangeException ("Bad vision state encountered");
+			}
 		}
 	}
 }

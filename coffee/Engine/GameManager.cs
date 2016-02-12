@@ -18,7 +18,7 @@ namespace coffee
 			Objects = new List<GameObject> ();
 
 			GameObject player = new GameObject ();
-			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, new Vector2 (3, 3), true));
+			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, new Vector2 (20, 3), true));
 			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Black));
 			player.AddComponent<RenderComponent> (new RenderComponent (player));
 			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
@@ -27,7 +27,18 @@ namespace coffee
 
 			Player = player;
 
-			Objects.Add (MonsterMaker (new Vector2 (4, 2)));
+			// A horde!  For testin'.
+			if (true) {
+				Objects.Add (MonsterMaker (new Vector2 (2, 2)));
+				Objects.Add (MonsterMaker (new Vector2 (3, 2)));
+				Objects.Add (MonsterMaker (new Vector2 (4, 2)));
+				Objects.Add (MonsterMaker (new Vector2 (2, 1)));
+				Objects.Add (MonsterMaker (new Vector2 (3, 1)));
+				Objects.Add (MonsterMaker (new Vector2 (4, 1)));
+				Objects.Add (MonsterMaker (new Vector2 (2, 3)));
+				Objects.Add (MonsterMaker (new Vector2 (3, 3)));
+				Objects.Add (MonsterMaker (new Vector2 (4, 3)));
+			}
 
 			Objects.Add (player);
 		}
