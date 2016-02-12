@@ -38,7 +38,6 @@ namespace coffee
 			Map.GetCell (Location).ClearActor ();
 			Location = destination;
 			Map.GetCell (Location).Actor = Parent;
-			Map.GetCell (Location).SeeTile ();
 		}
 
 		public Cell.VisionState Visibility {

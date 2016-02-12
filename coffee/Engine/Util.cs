@@ -34,6 +34,11 @@ namespace coffee
 			return new Vector2 (a.X + b.X, a.Y + b.Y);
 		}
 
+		public static bool IsInside (Vector2 point, Vector2 bound)
+		{
+			return ((point.X >= 0) && (point.X < bound.X)) && ((point.Y >= 0) && (point.Y < bound.Y));
+		}
+
 		public Vector2 (int width, int height)
 		{
 			X = width;
@@ -45,7 +50,6 @@ namespace coffee
 	{
 		// Handy semi-consts
 		public static readonly Vector2 mapOrigin = new Vector2 (1, 5);
-		public static readonly RLNET.RLCell emptyCell = new RLNET.RLCell (RLNET.RLColor.Black, RLNET.RLColor.White, ' ');
 
 		private static RLNET.RLRootConsole _console;
 		private static MessageSystem _messages;

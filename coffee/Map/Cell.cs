@@ -21,7 +21,7 @@ namespace coffee
 
 		public Cell ()
 		{
-			Vision = VisionState.Seen;
+			Vision = VisionState.Hidden;
 		}
 
 		public void SetTile (GameObject tile)

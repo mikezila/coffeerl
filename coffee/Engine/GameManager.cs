@@ -24,6 +24,7 @@ namespace coffee
 			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
 			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
 			player.AddComponent<FactionComponent> (new FactionComponent (player, Faction.Player));
+			player.AddComponent<VisionComponent> (new VisionComponent (player, Map, 4));
 
 			Player = player;
 
@@ -78,6 +79,9 @@ namespace coffee
 		{
 			Map.Render ();
 			foreach (GameObject actor in Objects) {
+				if (Map.GetCell (actor.GetComponent<LocationComponent> ().Location).Vision != Cell.VisionState.Visible)
+					continue;
+
 				if (actor.HasComponent<RenderComponent> ()) {
 					actor.GetComponent<RenderComponent> ().Render ();
 				}
