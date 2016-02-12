@@ -95,8 +95,7 @@ namespace coffee
 		public void Render ()
 		{
 			foreach (Cell cell in Cells) {
-				if (cell.Vision == Cell.VisionState.Visible)
-					cell.Tile.GetComponent<RenderComponent> ().Render ();
+				cell.Tile.GetComponent<RenderComponent> ().Render ();
 			}
 		}
 	}

@@ -22,7 +22,7 @@ namespace coffee
 
 			switch (visibility) {
 			case Cell.VisionState.Seen:
-				Util.Console.Set (Util.mapOrigin.X + location.X, Util.mapOrigin.Y + location.Y, Parent.GetComponent<GlyphComponent> ().Cell);
+				Util.Console.Set (Util.mapOrigin.X + location.X, Util.mapOrigin.Y + location.Y, Parent.GetComponent<GlyphComponent> ().DimCell);
 				break;
 			case Cell.VisionState.Visible:
 				Util.Console.Set (Util.mapOrigin.X + location.X, Util.mapOrigin.Y + location.Y, Parent.GetComponent<GlyphComponent> ().Cell);

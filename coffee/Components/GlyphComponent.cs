@@ -7,6 +7,8 @@ namespace coffee
 	{
 		public RLCell Cell { get { return new RLCell (BackGroundColor, Color, GlyphChar); } }
 
+		public RLCell DimCell { get { return new RLCell (RLColor.Black, RLColor.Gray, GlyphChar); } }
+
 		public char GlyphChar { get; private set; }
 
 		public RLColor BackGroundColor { get; private set; }
