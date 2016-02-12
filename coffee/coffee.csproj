@@ -67,6 +67,8 @@
     <Compile Include="Components\FactionComponent.cs" />
     <Compile Include="Components\VisionComponent.cs" />
     <Compile Include="Components\GameFlowComponent.cs" />
+    <Compile Include="Map\ICMap.cs" />
+    <Compile Include="Engine\CMapGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

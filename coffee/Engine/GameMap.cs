@@ -23,6 +23,18 @@ namespace coffee
 			}
 		}
 
+		public GameMap ()
+		{
+			CMapGenerator map = new CMapGenerator ();
+			Cells = new Cell[map.MapSize.Size];
+			PlayerStart = map.PlayerStart;
+			Size = map.MapSize;
+			for (int i = 0; i < Size.Size; i++) {
+				Cells [i] = new Cell ();
+				Cells [i].SetTile (CreateTile (map.Tiles [i], i));
+			}
+		}
+
 		private GameObject CreateTile (char primative, int location)
 		{
 			GameObject tile = new GameObject ();
@@ -85,14 +97,8 @@ namespace coffee
 		public Cell GetCell (int x, int y)
 		{
 			if (x >= Size.X || x < 0 || y >= Size.Y || y < 0)
-				throw new ArgumentException ("Map lookup out of range.");
+				throw new ArgumentOutOfRangeException ("Map lookup out of range.");
 			return Cells [y * Size.X + x];
-		}
-
-		private void RelocateActor (Vector2 origin, Vector2 destination)
-		{
-			GetCell (destination).Actor = GetCell (origin).Actor;
-			GetCell (origin).ClearActor ();
 		}
 
 		public void Render ()

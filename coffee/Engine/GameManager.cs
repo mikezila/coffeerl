@@ -14,35 +14,10 @@ namespace coffee
 
 		public GameManager ()
 		{
-			Map = new GameMap ("map1.cmap");
+			Map = new GameMap ();
 			Objects = new List<GameObject> ();
-
-			GameObject player = new GameObject ();
-			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, Map.PlayerStart, true));
-			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Black));
-			player.AddComponent<RenderComponent> (new RenderComponent (player));
-			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
-			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
-			player.AddComponent<FactionComponent> (new FactionComponent (player, Faction.Player));
-			player.AddComponent<VisionComponent> (new VisionComponent (player, Map, 4));
-			player.AddComponent<GameFlowComponent> (new GameFlowComponent (player));
-
-			Player = player;
-
-			// A horde!  For testin'.
-			if (true) {
-				Objects.Add (MonsterMaker (new Vector2 (2, 2)));
-				Objects.Add (MonsterMaker (new Vector2 (3, 2)));
-				Objects.Add (MonsterMaker (new Vector2 (4, 2)));
-				Objects.Add (MonsterMaker (new Vector2 (2, 1)));
-				Objects.Add (MonsterMaker (new Vector2 (3, 1)));
-				Objects.Add (MonsterMaker (new Vector2 (4, 1)));
-				Objects.Add (MonsterMaker (new Vector2 (2, 3)));
-				Objects.Add (MonsterMaker (new Vector2 (3, 3)));
-				Objects.Add (MonsterMaker (new Vector2 (4, 3)));
-			}
-
-			Objects.Add (player);
+			Player = PlayerMaker ();
+			Objects.Add (Player);
 		}
 
 		// This is just a temp method to generate monsters until I have the map generator in and working.
@@ -59,6 +34,20 @@ namespace coffee
 			monster.AddComponent<FactionComponent> (new FactionComponent (monster, Faction.Monster));
 
 			return monster;
+		}
+
+		private GameObject PlayerMaker ()
+		{
+			GameObject player = new GameObject ();
+			player.AddComponent<LocationComponent> (new LocationComponent (player, Map, Map.PlayerStart, true));
+			player.AddComponent<GlyphComponent> (new GlyphComponent (player, '@', RLNET.RLColor.White, RLNET.RLColor.Black));
+			player.AddComponent<RenderComponent> (new RenderComponent (player));
+			player.AddComponent<MovementComponent> (new MovementComponent (player, Map));
+			player.AddComponent<KeyboardInputComponent> (new KeyboardInputComponent (player));
+			player.AddComponent<FactionComponent> (new FactionComponent (player, Faction.Player));
+			player.AddComponent<VisionComponent> (new VisionComponent (player, Map, 4));
+			player.AddComponent<GameFlowComponent> (new GameFlowComponent (player));
+			return player;
 		}
 
 		//TODO: Undo this hack.  It's just in place as an experiment.
@@ -81,7 +70,8 @@ namespace coffee
 		public void RenderUI ()
 		{
 			//Tile type readout
-			Util.Console.Print (0, 3, Map.GetCell (Player.GetComponent<LocationComponent> ().Location).Tile.GetComponent<NameComponent> ().Name, RLColor.Cyan);
+			if (Player != null)
+				Util.Console.Print (0, 3, Map.GetCell (Player.GetComponent<LocationComponent> ().Location).Tile.GetComponent<NameComponent> ().Name, RLColor.Cyan);
 		}
 
 		public void Render ()

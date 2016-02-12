@@ -15,6 +15,10 @@ namespace coffee
 		public void Render ()
 		{
 			Cell.VisionState visibility = Parent.GetComponent<LocationComponent> ().Visibility;
+
+			//Debugging, set to full-bright
+			visibility = Cell.VisionState.Visible;
+
 			if (!Enabled || visibility == Cell.VisionState.Hidden)
 				return;
 

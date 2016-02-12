@@ -3,7 +3,7 @@ using System.IO;
 
 namespace coffee
 {
-	public class CMapFile
+	public class CMapFile : ICMap
 	{
 		// Part of header used to ID a coffeeMap file.
 		const string Magic = "coffee";
