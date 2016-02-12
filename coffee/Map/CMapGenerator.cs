@@ -21,8 +21,22 @@ namespace coffee
 				Tiles [i] = '5';
 			}
 
-			PlayerStart = Vector2.Zero;
-			Tiles [0] = '1';
+			PlayerStart = new Vector2 (10, 10);
+
+			Carve (new Vector2 (0, 0), new Vector2 (MapSize.X - 1, MapSize.Y - 1), 3);
+		}
+
+		// The origin must be the top left, the extent the bottom right
+		private void Carve (Vector2 origin, Vector2 extent, int wallThickness = 0)
+		{
+			origin += wallThickness;
+			extent -= wallThickness;
+
+			for (int i = 0; i <= extent.X - origin.X; i++) {
+				for (int j = 0; j <= extent.Y - origin.Y; j++) {
+					Tiles [(origin.Y + j) * MapSize.X + (origin.X + i)] = '1';
+				}
+			}
 		}
 	}
 }
