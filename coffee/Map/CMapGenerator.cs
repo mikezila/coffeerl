@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace coffee
 {
@@ -14,6 +15,8 @@ namespace coffee
 
 		public Vector2 PlayerStart { get; private set; }
 
+		public Stack<Region> Divisions { get; set; }
+
 		public CMapGenerator ()
 		{
 			Tiles = new char[MapSize.Size];
@@ -21,9 +24,9 @@ namespace coffee
 				Tiles [i] = '5';
 			}
 
-			PlayerStart = new Vector2 (10, 10);
+			PlayerStart = new Vector2 (1, 1);
 
-			Carve (new Vector2 (0, 0), new Vector2 (MapSize.X - 1, MapSize.Y - 1), 3);
+			Carve (new Vector2 (0, 0), new Vector2 (MapSize.X - 1, MapSize.Y - 1), 1);
 		}
 
 		// The origin must be the top left, the extent the bottom right
@@ -37,6 +40,11 @@ namespace coffee
 					Tiles [(origin.Y + j) * MapSize.X + (origin.X + i)] = '1';
 				}
 			}
+		}
+
+		private void FillCell (Vector2 cell, char type)
+		{
+			Tiles [cell.Y * MapSize.X + cell.X] = type;
 		}
 	}
 }

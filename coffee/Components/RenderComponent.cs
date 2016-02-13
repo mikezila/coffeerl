@@ -7,6 +7,8 @@ namespace coffee
 	{
 		public bool Enabled { get; set; }
 
+		private bool fullBright = true;
+
 		public RenderComponent (GameObject parent) : base (parent)
 		{
 			Enabled = true;
@@ -16,8 +18,10 @@ namespace coffee
 		{
 			Cell.VisionState visibility = Parent.GetComponent<LocationComponent> ().Visibility;
 
+			//TODO: Remember to remove this
 			//Debugging, set to full-bright
-			visibility = Cell.VisionState.Visible;
+			if (fullBright)
+				visibility = Cell.VisionState.Visible;
 
 			if (!Enabled || visibility == Cell.VisionState.Hidden)
 				return;

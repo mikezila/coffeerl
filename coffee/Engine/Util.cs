@@ -56,10 +56,10 @@ namespace coffee
 			return ((point.X >= 0) && (point.X < bound.X)) && ((point.Y >= 0) && (point.Y < bound.Y));
 		}
 
-		public Vector2 (int width, int height)
+		public Vector2 (int x, int y)
 		{
-			X = width;
-			Y = height;
+			X = x;
+			Y = y;
 		}
 	}
 
@@ -87,6 +87,16 @@ namespace coffee
 			set {
 				_messages = value;
 			}
+		}
+
+		public static bool Same (this Vector2 s, Vector2 other)
+		{
+			return ((s.X == other.X) && (s.Y == other.Y));
+		}
+
+		public static Vector2 Abs (this Vector2 s)
+		{
+			return new Vector2 (Math.Abs (s.X), Math.Abs (s.Y));
 		}
 
 		//Function to get random number

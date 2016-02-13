@@ -15,7 +15,6 @@ namespace coffee
 			setup.BitmapFile = "dsc8x12.png";
 			setup.CharWidth = 8;
 			setup.CharHeight = 12;
-			setup.WindowBorder = RLWindowBorder.Fixed;
 			setup.Width = 80;
 			setup.Height = 40;
 			setup.Title = "coffee";

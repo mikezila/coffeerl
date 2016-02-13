@@ -1,6 +1,7 @@
 ﻿using System;
 using RLNET;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace coffee
 {
@@ -25,7 +26,11 @@ namespace coffee
 
 		void renderGame ()
 		{
+			//An ugly-but-it-works way to stop the game rendering a shitload of frames
+			//Improves window-drag responsiveness on Linux a lot, as well.
+			System.Threading.Thread.Sleep (60);
 			manager.Render ();
+
 		}
 
 		void gameUpdate (object sender, UpdateEventArgs e)
