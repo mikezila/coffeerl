@@ -25,11 +25,15 @@ namespace coffee
 			PlayerStart = Vector2.One;
 			Name = "Debug Land";
 
+			// To carve out a place for the player to stand.
+			// Just to make sure they don't spawn inside solid wall.
 			FillCell (Vector2.One, '1');
 
 			BSPGen ();
 		}
 
+
+		//TODO: This whole thing stinks.  I'm not sure if I should be impressed with myself or ashamed.
 		private void BSPGen ()
 		{
 			List<Region> regions = new List<Region> ();
@@ -75,13 +79,11 @@ namespace coffee
 
 			switch (sliceType) {
 			case 0: // Vertical slice
-				//slicePoint = Util.RandomNumber (subject.Origin.X + wallMarginX, subject.Extent.X - wallMarginX);
 				slicePoint = (subject.Extent.X - subject.Origin.X) / 2;
 				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Origin.X + slicePoint, subject.Extent.Y)); // Checked
 				nextGen [1] = new Region (new Vector2 (subject.Origin.X + slicePoint + 1, subject.Origin.Y), subject.Extent); // Checked
 				break;
 			case 1: // Horizontal slice
-				//slicePoint = Util.RandomNumber (subject.Origin.Y + wallMarginY, subject.Extent.Y - wallMarginY);
 				slicePoint = (subject.Extent.Y - subject.Origin.Y) / 2;
 				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Extent.X, subject.Origin.Y + slicePoint)); // Checked
 				nextGen [1] = new Region (new Vector2 (subject.Origin.X, subject.Origin.Y + slicePoint + 1), subject.Extent); // Checked
