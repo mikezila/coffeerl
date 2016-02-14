@@ -56,6 +56,11 @@ namespace coffee
 			return ((point.X >= 0) && (point.X < bound.X)) && ((point.Y >= 0) && (point.Y < bound.Y));
 		}
 
+		public override string ToString ()
+		{
+			return string.Format ("[Vector2: X={0}, Y={1}, Size={2}]", X, Y, Size);
+		}
+
 		public Vector2 (int x, int y)
 		{
 			X = x;
@@ -101,7 +106,7 @@ namespace coffee
 
 		//Function to get random number
 		//http://stackoverflow.com/questions/767999/random-number-generator-only-generating-one-random-number/768001#768001
-		private static readonly Random random = new Random ();
+		private static readonly Random random = new Random (DateTime.Now.Millisecond);
 		private static readonly object syncLock = new object ();
 
 		public static int RandomNumber (int min, int max)

@@ -8,15 +8,12 @@ namespace coffee
 
 		public Vector2 Extent { get; private set; }
 
-		public int Generation { get; private set; }
+		public bool Terminal { get; set; }
 
-		public bool Terminal { get; private set; }
-
-		public Region (Vector2 origin, Vector2 extent, int generation)
+		public Region (Vector2 origin, Vector2 extent)
 		{
 			Origin = origin;
 			Extent = extent;
-			Generation = generation;
 		}
 	}
 }

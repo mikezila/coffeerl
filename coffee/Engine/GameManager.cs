@@ -14,10 +14,7 @@ namespace coffee
 
 		public GameManager ()
 		{
-			Map = new GameMap ();
-			Objects = new List<GameObject> ();
-			Player = PlayerMaker ();
-			Objects.Add (Player);
+			ReGenMap ();
 		}
 
 		// This is just a temp method to generate monsters until I have the map generator in and working.
@@ -48,6 +45,14 @@ namespace coffee
 			player.AddComponent<VisionComponent> (new VisionComponent (player, Map, 4));
 			player.AddComponent<GameFlowComponent> (new GameFlowComponent (player));
 			return player;
+		}
+
+		public void ReGenMap ()
+		{
+			Map = new GameMap ();
+			Objects = new List<GameObject> ();
+			Player = PlayerMaker ();
+			Objects.Add (Player);
 		}
 
 		//TODO: Undo this hack.  It's just in place as an experiment.

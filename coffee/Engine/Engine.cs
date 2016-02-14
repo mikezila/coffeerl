@@ -42,6 +42,9 @@ namespace coffee
 			if (keypress != null && keypress.Key == RLKey.Escape)
 				Util.Console.Close ();
 
+			if (keypress != null && keypress.Key == RLKey.M)
+				manager.ReGenMap ();
+
 			// Send the keypress into the GameManger's update cycle
 			manager.Update (keypress);
 		}
