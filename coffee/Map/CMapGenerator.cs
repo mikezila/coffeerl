@@ -7,7 +7,7 @@ namespace coffee
 	{
 		// This is arbitrary, just something that feels good.
 		// I want maps to always be one screen.
-		public Vector2 MapSize { get { return new Vector2 (78, 28); } }
+		public Vector2 MapSize { get { return new Vector2 (118, 50); } }
 
 		public char[] Tiles { get; set; }
 
@@ -35,23 +35,38 @@ namespace coffee
 			List<Region> regions = new List<Region> ();
 
 			//Root region
-			regions.Add (new Region (Vector2.Zero, MapSize - 1));
-			regions [0].Terminal = false;
+			Region root = new Region (Vector2.Zero, MapSize - 1);
+			root.Terminal = false;
+			regions.Add (root);
 
-			regions.AddRange (SliceRegion (regions [0]));
+			const int levels = 2;
+			for (int i = 0; i <= levels; i++) {
+				List<Region> newGeneration = new List<Region> ();
+				foreach (Region node in regions) {
+					if (node.AlreadyCut)
+						continue;
+					node.AlreadyCut = true;
+					newGeneration.AddRange (SliceRegion (node));
+				}
 
+				if (i == levels)
+					foreach (Region node in newGeneration)
+						node.Terminal = true;
 
+				regions.AddRange (newGeneration);
+				newGeneration.Clear ();
+			}
 
 			//Carve out our terminal regions
 			foreach (Region node in regions)
 				if (node.Terminal)
-					CarveRegion (node, 1);
+					Carve (node, 1);
 		}
 
 		private Region[] SliceRegion (Region subject)
 		{
-			const int wallMarginX = 8;
-			const int wallMarginY = 5;
+			const int wallMarginX = 2;
+			const int wallMarginY = 2;
 			int slicePoint;
 
 			Region[] nextGen = new Region[2];
@@ -60,27 +75,25 @@ namespace coffee
 
 			switch (sliceType) {
 			case 0: // Vertical slice
-				slicePoint = Util.RandomNumber (subject.Origin.X + wallMarginX, subject.Extent.X - wallMarginX);
-				nextGen [0] = new Region (subject.Origin, new Vector2 (slicePoint, subject.Extent.Y));
-				nextGen [1] = new Region (new Vector2 (subject.Origin.X + slicePoint + 1, subject.Origin.Y), subject.Extent);
-				nextGen [0].Terminal = true;
-				nextGen [1].Terminal = true;
+				//slicePoint = Util.RandomNumber (subject.Origin.X + wallMarginX, subject.Extent.X - wallMarginX);
+				slicePoint = (subject.Extent.X - subject.Origin.X) / 2;
+				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Origin.X + slicePoint, subject.Extent.Y)); // Checked
+				nextGen [1] = new Region (new Vector2 (subject.Origin.X + slicePoint + 1, subject.Origin.Y), subject.Extent); // Checked
 				break;
 			case 1: // Horizontal slice
-				slicePoint = Util.RandomNumber (subject.Origin.Y + wallMarginY, subject.Extent.Y - wallMarginY);
-				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Extent.X, slicePoint));
-				nextGen [1] = new Region (new Vector2 (subject.Origin.X, subject.Origin.Y + slicePoint + 1), subject.Extent);
-				nextGen [0].Terminal = true;
-				nextGen [1].Terminal = true;
+				//slicePoint = Util.RandomNumber (subject.Origin.Y + wallMarginY, subject.Extent.Y - wallMarginY);
+				slicePoint = (subject.Extent.Y - subject.Origin.Y) / 2;
+				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Extent.X, subject.Origin.Y + slicePoint)); // Checked
+				nextGen [1] = new Region (new Vector2 (subject.Origin.X, subject.Origin.Y + slicePoint + 1), subject.Extent); // Checked
 				break;
 			default:
-				throw new Exception ("Level generator is busted.");
+				throw new Exception ("Bad cut type.");
 			}
 
 			return nextGen;
 		}
 
-		private void CarveRegion (Region Region, int wallThickness = 0)
+		private void Carve (Region Region, int wallThickness = 0)
 		{
 			Carve (Region.Origin, Region.Extent, wallThickness);
 		}

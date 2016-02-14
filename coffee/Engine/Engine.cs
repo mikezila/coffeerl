@@ -28,7 +28,7 @@ namespace coffee
 		{
 			//An ugly-but-it-works way to stop the game rendering a shitload of frames
 			//Improves window-drag responsiveness on Linux a lot, as well.
-			System.Threading.Thread.Sleep (60);
+			System.Threading.Thread.Sleep (50);
 			manager.Render ();
 
 		}

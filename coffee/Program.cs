@@ -15,8 +15,8 @@ namespace coffee
 			setup.BitmapFile = "dsc8x12.png";
 			setup.CharWidth = 8;
 			setup.CharHeight = 12;
-			setup.Width = 80;
-			setup.Height = 40;
+			setup.Width = 120;
+			setup.Height = 60;
 			setup.Title = "coffee";
 			game = new RLRootConsole (setup);
 			new Engine (game);

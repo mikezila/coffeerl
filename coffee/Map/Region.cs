@@ -10,10 +10,14 @@ namespace coffee
 
 		public bool Terminal { get; set; }
 
+		public bool AlreadyCut { get; set; }
+
 		public Region (Vector2 origin, Vector2 extent)
 		{
 			Origin = origin;
 			Extent = extent;
+			Terminal = false;
+			AlreadyCut = false;
 		}
 	}
 }
