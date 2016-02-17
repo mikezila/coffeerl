@@ -39,15 +39,17 @@ namespace coffee
 			List<Region> regions = new List<Region> ();
 
 			//Root region
-			Region root = new Region (Vector2.Zero, MapSize - 1);
+			Region root = new Region (Vector2.Zero, MapSize - 1, 0);
 			root.Terminal = false;
 			regions.Add (root);
 
-			const int levels = 2;
+			//Max number of division levels
+			const int levels = 5;
+
 			for (int i = 0; i <= levels; i++) {
 				List<Region> newGeneration = new List<Region> ();
 				foreach (Region node in regions) {
-					if (node.AlreadyCut)
+					if (node.AlreadyCut || node.Terminal)
 						continue;
 					node.AlreadyCut = true;
 					newGeneration.AddRange (SliceRegion (node));
@@ -62,9 +64,14 @@ namespace coffee
 			}
 
 			//Carve out our terminal regions
-			foreach (Region node in regions)
+			foreach (Region node in regions) {
 				if (node.Terminal)
 					Carve (node, 1);
+			}
+
+			foreach (Region node in regions) {
+				Console.WriteLine (node.Generation);
+			}
 		}
 
 		private Region[] SliceRegion (Region subject)
@@ -80,16 +87,25 @@ namespace coffee
 			switch (sliceType) {
 			case 0: // Vertical slice
 				slicePoint = (subject.Extent.X - subject.Origin.X) / 2;
-				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Origin.X + slicePoint, subject.Extent.Y)); // Checked
-				nextGen [1] = new Region (new Vector2 (subject.Origin.X + slicePoint + 1, subject.Origin.Y), subject.Extent); // Checked
+				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Origin.X + slicePoint, subject.Extent.Y), subject.Generation + 1); 
+				nextGen [1] = new Region (new Vector2 (subject.Origin.X + slicePoint + 1, subject.Origin.Y), subject.Extent, subject.Generation + 1); 
 				break;
 			case 1: // Horizontal slice
 				slicePoint = (subject.Extent.Y - subject.Origin.Y) / 2;
-				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Extent.X, subject.Origin.Y + slicePoint)); // Checked
-				nextGen [1] = new Region (new Vector2 (subject.Origin.X, subject.Origin.Y + slicePoint + 1), subject.Extent); // Checked
+				nextGen [0] = new Region (subject.Origin, new Vector2 (subject.Extent.X, subject.Origin.Y + slicePoint), subject.Generation + 1);
+				nextGen [1] = new Region (new Vector2 (subject.Origin.X, subject.Origin.Y + slicePoint + 1), subject.Extent, subject.Generation + 1);
 				break;
 			default:
 				throw new Exception ("Bad cut type.");
+			}
+
+			//Mark any regions smaller than this to not be split again
+			const int minSize = 6;
+
+			for (int i = 0; i < 2; i++) {
+				if (nextGen [i].Width <= minSize || nextGen [i].Height <= minSize)
+					nextGen [i].Terminal = true;
+					
 			}
 
 			return nextGen;

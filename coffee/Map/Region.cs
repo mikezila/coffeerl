@@ -12,7 +12,13 @@ namespace coffee
 
 		public bool AlreadyCut { get; set; }
 
-		public Region (Vector2 origin, Vector2 extent)
+		public int Height { get { return Extent.Y - Origin.Y; } }
+
+		public int Width { get { return Extent.X - Origin.X; } }
+
+		public int Generation { get; private set; }
+
+		public Region (Vector2 origin, Vector2 extent, int generation)
 		{
 			Origin = origin;
 			Extent = extent;
