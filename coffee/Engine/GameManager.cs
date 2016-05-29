@@ -12,8 +12,11 @@ namespace coffee
 
 		GameObject Player { get; set; }
 
+        List<UIWindow> Windows { get; set; }
+
 		public GameManager ()
 		{
+            Windows = new List<UIWindow>();
 			ReGenMap ();
 		}
 
