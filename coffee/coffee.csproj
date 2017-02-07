@@ -30,13 +30,13 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="OpenTK">
+      <HintPath>..\packages\OpenTK.1.1.1589.5942\lib\NET40\OpenTK.dll</HintPath>
+    </Reference>
     <Reference Include="RLNET">
       <HintPath>..\packages\RLNET.1.0.6\lib\RLNET.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>..\packages\OpenTK.1.1.2225.0\lib\net20\OpenTK.dll</HintPath>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -74,15 +74,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="ascii_8x8.png" />
-    <None Include="OpenTK.dll.config" />
     <None Include="map1.cmap">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="dsc8x12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
 </Project>
